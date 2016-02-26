@@ -3,6 +3,14 @@ vagrant-pulp
 
 Vagrant configurations for pulp envs.
 
+The vagrant installs done here happened on an Ubuntu 14.04 host. To
+make use of the images the stock vagrant package was not
+sufficient. Instead a version (1.8.1) from
+
+  https://www.vagrantup.com/downloads.html
+
+was fetched and installed (Debian 64-bit, using `dpkg -i`).
+
 Each directory in this project provides a different vagrant
 configuration creating pulp developer envs.
 
