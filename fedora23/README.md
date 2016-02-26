@@ -43,3 +43,25 @@ After we made sure the checksum is okay, we make the box available locally:
 
     $ vagrant box add --name "fedora/23-cloud-base" Fedora-Cloud-Base-Vagrant-23-20151030.x86_64.vagrant-virtualbox.box
 
+
+VirtualBox Guest Additions
+--------------------------
+
+The default Fedora 23 vagrant virtualbox cloud image comes without
+VBGuestAdditions. These are needed for most communication with the
+"outer-world", even for mounting simple paths. Luckily, there is a
+vagrant plugin that installs suitable stuff in your virtualbox if
+non-matching vbox guest additions (or none at all) were detected on
+boot-up.
+
+The `vbguest` plugin can be installed like this:
+
+    $ vagrant plugin install vagrant-vbguest
+
+and requires a
+
+    $ vagrant reload
+
+if you got your vagrant box running already. Otherwise it will check
+at time of next `vargrant up` whether everything is allright with your
+local box.
