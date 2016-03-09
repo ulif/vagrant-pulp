@@ -65,3 +65,34 @@ and requires a
 if you got your vagrant box running already. Otherwise it will check
 at time of next `vargrant up` whether everything is allright with your
 local box.
+
+
+Setup Vagrant Machine (not: Box)
+--------------------------------
+
+You should now be ready for setting up your vagrant machine, i.e.
+we will create a running machine from the box prepared before.
+
+If you want to add SSH RSA keys for cloning data from your github
+account, you can put them into the local `ssh/` dir. They should
+be named `id_github_vagrant` and `id_github_vagrant.pub` for the
+private/public key respectively.
+
+Of course the key must be registered with github if you want to use
+it inside the local machine.
+
+Another requirement: we expect a directory ../../devel in the hosts
+local filesystem. This will be mounted as /home/vagrant/devel/. If
+you do not have such a directory, please change the `Vagrantfile`
+accordingly.
+
+If everything is prepared, start the machine:
+
+    $ vagrant up
+
+will take lots of time and prepare your machine. Afterwards you can
+login into the machine:
+
+    $ vagrant ssh
+
+After first start the devel environment will not be ready.
