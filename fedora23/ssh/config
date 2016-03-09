@@ -1,0 +1,5 @@
+Host github.com
+	Hostname github.com
+	User git
+        IdentityFile /home/vagrant/.ssh/id_github_vagrant
+        IdentitiesOnly yes
