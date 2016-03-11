@@ -96,3 +96,31 @@ login into the machine:
     $ vagrant ssh
 
 After first start the devel environment will not be ready.
+
+
+Install Dev Env Inside Vagrant
+------------------------------
+
+Finally we can install the PULP development environment with the local
+`dev-setup.sh` script. Given, the preparations were done correctly,
+you can ssh into the vagrant box and start the script:
+
+    (fedora23) $ bash -e dev-setup.sh
+
+The script works interactively. You will have to answer a few
+questions, might have to allow SSH connections to github, etc. and
+then you will have plenty of time. Get you a cup of coffee and wait
+for updates, installs, etc.
+
+Afterwards you can logout and login again. All should be ready now:
+
+    (fedora23) $ exit
+    $ vagrant ssh
+
+Now you should see a greeting screen explaining some dev commands you
+have available. You can activate a dev env like this:
+
+    (fedora23) $ workenv pulp
+    (fedora23)(pulp) $
+
+The development environment is now ready.
