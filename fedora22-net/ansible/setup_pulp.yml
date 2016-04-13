@@ -1,0 +1,21 @@
+- hosts: all
+  become: yes
+  become_user: root
+  remote_user: vagrant
+
+  tasks:
+
+    - name: Download Repo Definitions
+      get_url: url=https://repos.fedorapeople.org/repos/pulp/pulp/fedora-pulp.repo dest=/etc/yum.repos.d/fedora-pulp.repo mode=0644
+
+    - name: install yum
+      dnf: name=yum state=installed
+
+    - name: Install mongodb
+      yum: name=mongodb-server state=installed update_cache=true
+
+    - name: Start mongodb and enable it
+      service: name=mongod state=started enabled=yes
+
+    - name: Final greeting
+      pause: prompt="Don't worry about all the red above; if you made it here, your Vagrant VMs are probably fine ! Please press [Enter]"
