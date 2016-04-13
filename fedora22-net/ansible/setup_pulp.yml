@@ -17,5 +17,18 @@
     - name: Start mongodb and enable it
       service: name=mongod state=started enabled=yes
 
+    - name: Install qpid packages
+      dnf: name={{ item }} state=present
+      with_items:
+      - qpid-cpp-client
+      - qpid-cpp-server
+      - qpid-cpp-server-linearstore
+      - qpid-tools
+
+    - name: Start and enable qpid services
+      service: name={{ item }} state=started enabled=yes
+      with_items:
+      - qpidd
+
     - name: Final greeting
       pause: prompt="Don't worry about all the red above; if you made it here, your Vagrant VMs are probably fine ! Please press [Enter]"
