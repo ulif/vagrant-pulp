@@ -3,6 +3,12 @@
   become_user: root
   remote_user: vagrant
 
+  handlers:
+
+    - name: restart mongod
+      service: name=mongod state=restarted
+
+
   tasks:
 
     - name: Download Repo Definitions
@@ -11,8 +17,19 @@
     - name: install yum
       dnf: name=yum state=installed
 
-    - name: Install mongodb
-      yum: name=mongodb-server state=installed update_cache=true
+    - name: Install mongodb packages
+      dnf: name={{ item }} state=present
+      with_items:
+        - mongodb
+        - mongodb-server
+
+    - name: Disable MongoDB journal
+      lineinfile:
+        backrefs: yes
+        dest: /etc/mongod.conf
+        regexp: "^#nojournal = true"
+        line: "nojournal = true"
+      notify: restart mongod
 
     - name: Start mongodb and enable it
       service: name=mongod state=started enabled=yes
