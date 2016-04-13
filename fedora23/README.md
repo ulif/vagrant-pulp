@@ -124,3 +124,41 @@ have available. You can activate a dev env like this:
     (fedora23)(pulp) $
 
 The development environment is now ready.
+
+
+Some Hints
+----------
+
+*Session handling: login, logout*
+
+Given you aktivated `vagrant` a dev session and all that, you should
+be able to do "pulp-stuff" like running `pulp-admin` and the like.
+
+`pulp-admin` needs a session cert which is valid for 7 days after
+creation. It is created automatically if you do:
+
+    (pulp)[vagrant@localhost pulp]$ pulp-admin login -u admin
+
+you will be asked for a password which happens to be 'admin'.
+
+The certificate can be invalidated by:
+
+    (pulp)[vagrant@localhost pulp]$ pulp-admin logout
+    Session certificate successfully removed.
+
+
+
+* Check Status of Server
+
+   $ pulp-admin status
+
+
+*Available Actions*
+
+To get a list of all available actions, use
+
+    $ pulp-admin --map
+
+This will get you an extensive map of available actions.
+
+
