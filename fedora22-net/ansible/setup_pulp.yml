@@ -23,11 +23,11 @@
         - mongodb
         - mongodb-server
 
-    - name: Disable MongoDB journal
+    - name: Disable MongoDB journal (64bit)
       lineinfile:
         backrefs: yes
         dest: /etc/mongod.conf
-        regexp: "^#nojournal = true"
+        regexp: "^#nojournal = false"
         line: "nojournal = true"
       notify: restart mongod
 
@@ -46,6 +46,17 @@
       service: name={{ item }} state=started enabled=yes
       with_items:
       - qpidd
+
+    - name: Install Pulp server, task workers and dependecies
+      dnf: name=pulp-server state=present
+
+    - name: Install and enable pulp workers
+      service: name={{ item }} state=started enabled=yes
+      with_items:
+      - pulp_workers
+      - pulp_celerybeat
+      - pulp_resource_manager
+
 
     - name: Final greeting
       pause: prompt="Don't worry about all the red above; if you made it here, your Vagrant VMs are probably fine ! Please press [Enter]"
