@@ -1,0 +1,22 @@
+---
+- name: Disable sshd strict modes
+  lineinfile:
+      backrefs: yes
+      dest: /etc/ssh/sshd_config
+      regexp: "^#StrictModes yes"
+      line: "StrictModes no"
+  notify: restart sshd
+
+- name: Install Pulp dnf repository
+  get_url:
+      url: https://repos.fedorapeople.org/repos/pulp/pulp/fedora-pulp.repo
+      dest: /etc/yum.repos.d/fedora-pulp.repo
+
+- name: Install required packages
+  dnf: name={{ item }} state=present
+  with_items:
+    - "@pulp-consumer-qpid"
+
+- name: Start and enable goferd
+  service: name=goferd state=started enabled=yes
+
