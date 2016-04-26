@@ -27,3 +27,19 @@
       line: "host: pulp1.example.org"
       state: present
   notify: restart goferd
+
+- name: Configure consumer client - set localhost as server
+  lineinfile:
+      dest: /etc/pulp/consumer/consumer.conf
+      insertafter: '^\[server\]'
+      line: "host: pulp1.example.org"
+      state: present
+  notify: restart goferd
+
+- name: Configure consumer client - disable ssl-verification
+  lineinfile:
+      dest: /etc/pulp/consumer/consumer.conf
+      insertafter: '^\[server\]'
+      line: "verify_ssl: False"
+      state: present
+  notify: restart goferd
