@@ -1,6 +1,12 @@
 Set up a net of pulp servers
 ============================
 
+This setup requires the `vagrant-hosts` plugin installed:
+
+    $ vagrant plugin install vagrant-hosts
+
+has to be run once.
+
 Initialize the hosts:
 
     $ vagrant up
