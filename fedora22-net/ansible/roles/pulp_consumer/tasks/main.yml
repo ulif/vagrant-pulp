@@ -20,3 +20,10 @@
 - name: Start and enable goferd
   service: name=goferd state=started enabled=yes
 
+- name: Configure admin client - set localhost as server
+  lineinfile:
+      dest: /etc/pulp/consumer/consumer.conf
+      insertafter: '^\[server\]'
+      line: "host: pulp1.example.org"
+      state: present
+  notify: restart goferd
