@@ -33,3 +33,13 @@
 
 - name: Start and enable pulp_resource_manager
   service: name=pulp_resource_manager state=started enabled=yes
+
+- name: Install pulp-admin
+  dnf: name="@pulp-admin" state=present
+
+- name: Configure admin client - set localhost as server
+  lineinfile:
+      dest: /etc/pulp/admin/admin.conf
+      insertafter: '^\[server\]'
+      line: "host: localhost.localdomain"
+      state: present
