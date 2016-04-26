@@ -1,0 +1,35 @@
+---
+- name: Disable sshd strict modes
+  lineinfile:
+      backrefs: yes
+      dest: /etc/ssh/sshd_config
+      regexp: "^#StrictModes yes"
+      line: "StrictModes no"
+  notify: restart sshd
+
+- name: allow vagrant user to read the systemd journal
+  user:
+      name: vagrant
+      state: present
+      groups: systemd-journal
+      append: true
+
+- name: Install Pulp dnf repository
+  get_url:
+      url: https://repos.fedorapeople.org/repos/pulp/pulp/fedora-pulp.repo
+      dest: /etc/yum.repos.d/fedora-pulp.repo
+
+- name: Install pulp_workers
+  dnf: name={{ item }} state=present
+  with_items:
+    - "@pulp-server-qpid"
+
+- name: Start and enable pulp_workers
+  service: name=pulp_workers state=started enabled=yes
+  notify: init db
+
+- name: Start and enable pulp_celerybeat
+  service: name=pulp_celerybeat state=started enabled=yes
+
+- name: Start and enable pulp_resource_manager
+  service: name=pulp_resource_manager state=started enabled=yes

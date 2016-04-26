@@ -1,0 +1,8 @@
+---
+- name: restart sshd
+  service: name=sshd state=restarted
+
+- name: init db
+  command: pulp-manage-db
+  become_user: apache
+  become_method: sudo
