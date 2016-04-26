@@ -32,7 +32,7 @@
   lineinfile:
       dest: /etc/pulp/consumer/consumer.conf
       insertafter: '^\[server\]'
-      line: "host: pulp1.example.org"
+      line: "host: pulp1"
       state: present
   notify: restart goferd
 
