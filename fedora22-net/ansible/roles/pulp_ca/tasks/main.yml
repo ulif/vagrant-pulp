@@ -1,4 +1,13 @@
 ---
+- name: Install httpd
+  dnf: name={{ item }} state=present
+  with_items:
+    - mod_ssl
+    - httpd
+
+- name: Start and enable apache
+  service: name=httpd state=started enabled=yes
+
 - name: Create Pulp Certificate Authority
   command: >
     /usr/bin/openssl req -x509 -newkey rsa:2048 -keyout private/cakey.pem -nodes -days 3650 \
@@ -53,4 +62,3 @@
       dest: /etc/httpd/conf.d/ssl.conf
       regexp: "^SSLCertificateKeyFile "
       line: "SSLCertificateKeyFile /etc/pki/tls/private/apachekey.pem"
-
