@@ -41,5 +41,5 @@
   lineinfile:
       dest: /etc/pulp/admin/admin.conf
       insertafter: '^\[server\]'
-      line: "host: localhost.localdomain"
+      line: "host: pulp1.example.org"
       state: present
