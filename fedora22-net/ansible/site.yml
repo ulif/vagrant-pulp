@@ -1,0 +1,4 @@
+---
+# site.yml
+- include: server-playbook.yml
+- include: consumer-playbook.yml
