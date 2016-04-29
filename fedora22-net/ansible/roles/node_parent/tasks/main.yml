@@ -4,3 +4,15 @@
   with_items:
     - "@pulp-nodes-parent"
 
+- name: Enable oauth in server.conf
+  blockinfile:
+      backup: yes
+      dest: /etc/pulp/server.conf
+      insertafter: '^\[oauth\]'
+      block: |
+        enabled: true
+        oauth_key: {{ oauth_key }}
+        oauth_secret: {{ oauth_secret }}
+  notify:
+    - Run pulp-manage-db
+    - Restart server components
