@@ -118,3 +118,44 @@ inherit all the role's permissions.
 
     (pulp1) $ pulp-admin auth permission grant  --resource / --role-id test-user -o read
     (pulp1) $ pulp-admin auth permission revoke --resource / --role-id test-user -o read
+
+
+Repositories
+------------
+
+You can register a sample repository like this:
+
+    (pulp1) $ pulp-admin rpm repo create --repo-id=zoo --feed=https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/
+
+
+
+
+Interacting with Consumers
+==========================
+
+
+Consumer (Un-)Registration
+--------------------------
+
+Consumers must register themselves first, using
+`pulp-consumer`. `pulp-consumer` always requires root (`sudo`)
+permissions:
+
+    (pulp2) $ sudo pulp-consumer -u admin register --consumer-id my-consumer
+
+This creates an x509 cert which will be valid for 10 years and stored
+in `/etc/pki/pulp/consumer/consumer-cert.pem`.
+
+Unregistration works accordingly:
+
+    (pulp2) $ sudo pulp-consumer unregister
+
+
+Binding to Repos
+----------------
+
+A registered consumer can bind to repositories (not need for 'sudo'
+any more). The respective repository must be available at the server,
+of course.
+
+    (pulp2) $ pulp-consumer rpm bind --repo-id=zoo
