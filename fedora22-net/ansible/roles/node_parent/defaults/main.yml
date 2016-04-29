@@ -1,0 +1,3 @@
+oauth_user: "admin"
+oauth_key: "unsecure-key"
+oauth_secret: "unsecure-secret"

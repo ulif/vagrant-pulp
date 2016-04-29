@@ -1,0 +1,13 @@
+---
+- name: Run pulp-manage-db
+  command: pulp-manage-db
+  become_user: apache
+  become_method: sudo
+
+- name: Restart server components
+  service: name={{ item }} state=restarted
+  with_items:
+    - httpd
+    - pulp_workers
+    - pulp_celerybeat
+    - pulp_resource_manager
