@@ -10,6 +10,9 @@
       insertafter: '^\[oauth\]'
       line: 'user_id: {{ oauth_user }}'
       state: present
+  notify:
+    - Run pulp-manage-db
+    - Restart server components
 
 - name: Set parent oauth credentials in nodes.conf
   blockinfile:
@@ -20,3 +23,6 @@
         key: {{ oauth_key }}
         secret: {{ oauth_secret }}
         user_id: {{ oauth_user }}
+  notify:
+    - Run pulp-manage-db
+    - Restart server components
