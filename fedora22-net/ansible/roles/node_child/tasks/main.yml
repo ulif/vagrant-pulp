@@ -4,3 +4,19 @@
   with_items:
     - "@pulp-nodes-child"
 
+- name: Set oauth user in nodes.conf
+  lineinfile:
+      dest: /etc/pulp/nodes.conf
+      insertafter: '^\[oauth\]'
+      line: 'user_id: {{ oauth_user }}'
+      state: present
+
+- name: Set parent oauth credentials in nodes.conf
+  blockinfile:
+      backup: yes
+      dest: /etc/pulp/nodes.conf
+      insertafter: '^\[parent_oauth\]'
+      block: |
+        key: {{ oauth_key }}
+        secret: {{ oauth_secret }}
+        user_id: {{ oauth_user }}
