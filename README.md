@@ -24,5 +24,8 @@ vagrant dir.
 `fedora23`
   Fedora 23 cloud base image-based pulp env.
 
+`f22-net`
+  Fedora 22 based virtual network of three hosts.
+
 See the respective directories to learn more about the specific
 builds.
