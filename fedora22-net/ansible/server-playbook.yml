@@ -5,8 +5,9 @@
   remote_user: vagrant
   vars:
   roles:
-    - qpidd
     - db
+    - qpidd
+    - node_parent
     - pulp_ca
     - pulp_server
     - pulp_consumer
