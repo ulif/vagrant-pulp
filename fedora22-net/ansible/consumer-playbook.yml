@@ -1,0 +1,9 @@
+---
+- hosts: pulp2.example.org
+  become: true
+  become_user: root
+  remote_user: vagrant
+  vars:
+  roles:
+    - qpidd
+    - pulp_consumer
