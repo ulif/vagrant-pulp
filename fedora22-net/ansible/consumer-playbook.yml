@@ -6,5 +6,6 @@
   vars:
   roles:
     - qpidd
+    - pulp_ca
     - node_child
     - pulp_consumer
