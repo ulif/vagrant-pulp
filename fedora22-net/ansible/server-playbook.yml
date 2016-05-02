@@ -7,7 +7,7 @@
   roles:
     - db
     - qpidd
-    - node_parent
     - pulp_ca
     - pulp_server
+    - node_parent
     - pulp_consumer
