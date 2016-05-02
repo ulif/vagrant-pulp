@@ -2,6 +2,7 @@
 - name: Install required packages
   dnf: name={{ item }} state=present
   with_items:
+    - "@pulp-server-qpid"
     - "@pulp-nodes-child"
 
 - name: Set oauth user in nodes.conf
@@ -23,6 +24,16 @@
         key: {{ oauth_key }}
         secret: {{ oauth_secret }}
         user_id: {{ oauth_user }}
+  notify:
+    - Run pulp-manage-db
+    - Restart server components
+
+- name: Unset verify_ssl in nodes.conf
+  lineinfile:
+      dest: /etc/pulp/nodes.conf
+      insertafter: '^\[main\]'
+      line: 'verify_ssl: False'
+      state: present
   notify:
     - Run pulp-manage-db
     - Restart server components
