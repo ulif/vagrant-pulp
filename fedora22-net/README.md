@@ -123,10 +123,25 @@ inherit all the role's permissions.
 Repositories
 ------------
 
-You can register a sample repository like this:
+You can create a sample RPM repository like this:
 
     (pulp1) $ pulp-admin rpm repo create --repo-id=zoo --feed=https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/
 
+All repos on a host can be listed by:
+
+    (pulp1) $ pulp-admin rpm repo list
+
+searched by:
+
+    (pulp1) $ pulp-admin rpm repo search
+
+Metadata can be changed by:
+
+    (pulp1) $ pulp-admin rpm repo update --repo-id=zoo
+
+A created repository can be deleted by:
+
+    (pulp1) $ pulp-admin rpm repo delete --repo-id=zoo
 
 
 
