@@ -9,5 +9,3 @@
     - qpidd
     - pulp_ca
     - pulp_server
-    - node_parent
-    - pulp_consumer
