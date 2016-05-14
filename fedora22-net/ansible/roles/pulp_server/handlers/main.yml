@@ -6,3 +6,11 @@
   command: pulp-manage-db
   become_user: apache
   become_method: sudo
+
+- name: restart server services
+  service: name={{   }} state=restarted
+  with_items:
+    - httpd
+    - pulp_workers
+    - pulp_celerybeat
+    - pulp_resource_manager
