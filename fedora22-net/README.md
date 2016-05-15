@@ -174,3 +174,51 @@ any more). The respective repository must be available at the server,
 of course.
 
     (pulp2) $ pulp-consumer rpm bind --repo-id=zoo
+
+
+Working with Nodes
+==================
+
+Preparing the Parent Node
+-------------------------
+
+Parent nodes can provide "repositories" for child nodes. To do so, a
+parent node must enable repositories first.
+
+    (pulp1) $ pulp-admin rpm repo create --repo-id=zoo --feed=https://repos.fedorapeople.org/repos/pulp/pulp/demo_repos/zoo/
+    (pulp1) $ pulp-admin node repo enable --repo-id zoo
+
+Enabling is not enough. Admins additionally must publish repos:
+
+    (pulp1) $ pulp-admin node repo publish --repo-id zoo
+
+Admins can afterwards list repos:
+
+    (pulp1) $ pulp-admin node repo list --all
+
+To retract repos, we have to unregister them:
+
+    (pulp1) $ pulp-admin node repo disable --repo-id zoo
+
+
+Handling Child Nodes
+--------------------
+
+Once, a parent host is ready (see above), consumers on child nodes can
+bind to parent nodes:
+
+    (pulp2) $ sudo pulp-consumer node activate
+
+Once activated, a child node can be bound to repos on parent. This can
+be done from both sides, from the parent side:
+
+    (pulp1) $ pulp-admin node bind --node-id c2 --repo-id zoo
+
+or from the child side:
+
+    (pulp2) $ pulp-consumer node bind --repo-id zoo
+
+Syncing a child node can be triggered from the parent side:
+
+    (pulp1) $ pulp-admin node sync run --node-id c2
+
