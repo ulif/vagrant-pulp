@@ -11,8 +11,9 @@ The short way:
 
     $ vagrant box add fedora/23-cloud-base
 
-downloads, checks and installs the box image from hashicorp. If you go
-this way, you're done and can proceed with next section.
+downloads, checks and installs the box image from hashicorp (when
+asked, pick the `virtualbox` option). If you go this way, you're done
+and can proceed with next section.
 
 The long way:
 
